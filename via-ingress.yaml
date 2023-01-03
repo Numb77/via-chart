@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: via-ingress
+  annotations:
+    ingress.kubernetes.io/whitelist-source-range: 192.168.122.1/24
+spec:
+  rules:
+  - host: http://NGINX_CONTROLLER_URL/service1/index.html
+    http:
+      paths:
+      - backend:
+          serviceName: nginx-first-deployment
+          servicePort: 80
+  - host: http://NGINX_CONTROLLER_URL/service2/index.html
+    http:
+      paths:
+      - backend:
+          serviceName: nginx-second-deployment
+          servicePort: 80
